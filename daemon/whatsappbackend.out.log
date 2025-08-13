@@ -1,0 +1,12 @@
+[dotenv@17.2.1] injecting env (2) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Loaded MONGO_URI: mongodb+srv://whatsapp:password1234@cluster0.6el7qnc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+✅ Connected to MongoDB
+Skipping conversation_1_message_1.json: message with id conv3_msg1 already exists
+Skipping conversation_1_message_2.json: message with id conv1_msg2 already exists
+Skipping conversation_1_status_1.json: message with id conv1_status1 already exists
+Skipping conversation_1_status_2.json: message with id conv1_status2 already exists
+Skipping conversation_2_message_1.json: message with id conv2_msg1 already exists
+Skipping conversation_2_message_2.json: message with id conv2_msg2 already exists
+Skipping conversation_2_status_1.json: message with id conv2_status1 already exists
+Skipping conversation_2_status_2.json: message with id conv2_status2 already exists
+🚀 Server running at http://localhost:3000
