@@ -1,7 +1,7 @@
 {
-  "id": "conv1_msg1",
-  "conversationId": "conversation_1",
-  "sender": "Alice",
-  "text": "Hey, are you coming to the party?",
-  "timestamp": "2025-08-12T18:00:00Z"
+  "id": "conv3_msg1",
+  "conversationId": "conversation_3",
+  "sender": "Bob",
+  "text": "Hello, this is a new message!",
+  "timestamp": "2025-08-13T12:00:00Z"
 }

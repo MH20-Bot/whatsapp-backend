@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WhatsApp Clone Frontend</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #eee; display: flex; justify-content: center; padding: 20px; }
+  .container { width: 400px; background: white; border-radius: 8px; box-shadow: 0 0 10px #ccc; display: flex; flex-direction: column; height: 600px; }
+  header { background: #075e54; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 1.2em; border-radius: 8px 8px 0 0; }
+  #messages { flex-grow: 1; padding: 10px; overflow-y: auto; }
+  .message { margin-bottom: 10px; padding: 8px 12px; border-radius: 20px; max-width: 70%; }
+  .sent { background: #dcf8c6; align-self: flex-end; }
+  .received { background: #fff; border: 1px solid #ddd; align-self: flex-start; }
+  form { display: flex; padding: 10px; border-top: 1px solid #ddd; }
+  input[type="text"] { flex-grow: 1; border-radius: 20px; border: 1px solid #ddd; padding: 8px 12px; }
+  button { margin-left: 8px; border-radius: 20px; background: #075e54; color: white; border: none; padding: 8px 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>WhatsApp Clone</header>
+    <div id="messages"></div>
+    <form id="sendForm">
+      <input id="messageInput" autocomplete="off" placeholder="Type a message" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+<script>
+  const backendUrl = 'http://localhost:3000';
+  const messagesDiv = document.getElementById('messages');
+  const form = document.getElementById('sendForm');
+  const input = document.getElementById('messageInput');
+
+  // Render messages in container
+  function renderMessages(messages) {
+    messagesDiv.innerHTML = '';
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.classList.add('message');
+      // Messages from "You" are sent, others are received
+      div.classList.add(msg.sender === 'You' ? 'sent' : 'received');
+      div.textContent = msg.text + (msg.status ? ` (${msg.status})` : '');
+      messagesDiv.appendChild(div);
+    });
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  // Fetch all messages from backend
+  async function fetchMessages() {
+    try {
+      const res = await fetch(`${backendUrl}/messages`);
+      const messages = await res.json();
+      renderMessages(messages);
+    } catch (e) {
+      console.error('Error fetching messages:', e);
+    }
+  }
+
+  // Send message to backend
+  async function sendMessage(text) {
+    const message = {
+      id: 'msg_' + Date.now(),
+      sender: 'You',
+      text,
+      timestamp: new Date().toISOString(),
+      status: 'sent'
+    };
+    try {
+      const res = await fetch(`${backendUrl}/messages`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(message),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        alert('Error: ' + err.error);
+      } else {
+        fetchMessages();
+      }
+    } catch (e) {
+      console.error('Error sending message:', e);
+    }
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    sendMessage(text);
+    input.value = '';
+  });
+
+  // Initial fetch and polling every 5 sec
+  fetchMessages();
+  setInterval(fetchMessages, 5000);
+</script>
+</body>
+</html>

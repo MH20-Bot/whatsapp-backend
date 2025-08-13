@@ -1,7 +1,6 @@
 {
   "id": "conv1_status2",
   "conversationId": "conversation_1",
-  "user": "Bob",
-  "status": "typing",
-  "timestamp": "2025-08-12T18:00:30Z"
+  "status": "read",
+  "timestamp": "2025-08-12T18:10:00Z"
 }
