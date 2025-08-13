@@ -1,0 +1,2 @@
+2025-08-13 21:14:22 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\micro\Desktop\whatsapp-backend\node_modules\node-windows\lib\wrapper.js --file C:\Users\micro\Desktop\whatsapp-backend\server.js --scriptoptions= --log "WhatsAppBackend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2025-08-13 21:14:22 - Started 32364
